@@ -60,6 +60,8 @@ function App() {
 만약 자식에게 다른 variants를 주고 싶을 경우엔 새로운 object를 만들어 준다.
 하지만 이 object의 property이름들은 부모와 같아야 한다.
 
+component에서 설정을 줄때 string으로 object내에 있는 property를 주는것 뿐아니라 {}를 통해 js를 이용할 수 있다.
+
 ```javascript
 const circleVariants = {
   start: { scale: 0 },

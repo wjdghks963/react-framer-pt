@@ -134,3 +134,42 @@ MotionValue()의 인자값은 default 값 설정이다.
 
 1. 위와 같은 코드일때는 x값이 업데이트 될때 마다 x의 값을 콘솔에 찍어준다.
 2. button을 누르면 x의 좌표가 200으로 움직인다.
+
+#### useTransForm
+
+useTransForm(x,[입력값],[출력값])
+
+값을 하나 받고 기준으로 입력값을 입력하고 출력값을 출력한다.
+
+```javascript
+function App() {
+  const x = useMotionValue(0);
+  const scale = useTransform(x, [-800, 0, 800], [2, 1, 0.1]);
+
+  return (
+    <Wrapper>
+      <button onClick={() => x.set(200)}>click</button>
+      <Box style={{ x, scale }} drag="x" dragSnapToOrigin />
+    </Wrapper>
+  );
+}
+```
+
+#### useViewportScroll
+
+scrollY
+페이지의 Y값
+
+scrollYProgress
+페이지의 Y축의 %
+
+```javascript
+const x = useMotionValue(0);
+const { scrollYProgress } = useViewportScroll();
+const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
+return (
+  <Wrapper style={{ background: gradient }}>
+    <Box style={{ scale }} drag="x" dragSnapToOrigin />
+  </Wrapper>
+);
+```

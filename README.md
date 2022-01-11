@@ -87,3 +87,25 @@ function App() {
   );
 }
 ```
+
+#### drag
+
+원하는 component에 drag기능을 넣고 싶다면 그냥 property에 drag를 추가하기만 된다.
+
+```javascript
+<Box drag />
+```
+
+원하는 xyz축으로만 이동시키게 하고 싶으면 drag="x"와 같이 설정한다.
+
+dragConstraints
+드래그를 통한 이동이 가능한 범위를 설정할 수 있다.
+
+dragSnapToOrigin
+상태가 true라면 드래그를 끝내면 다시 원위치로 돌아가는 기능
+
+dragElastic
+제한된 바깥을 벗어날 수 있는 이동 정도입니다.
+0 : 마우스 포인터가 제한된 공간을 벗어 나더라도 집힌 elemet는 따라서 나갈 수 없다.
+
+0을 넘어가면 박스 밖을 따라 나가지만 제한 하는 정도가 걸리는데 Elastic의 정도에 따라 설정이 가능하다.

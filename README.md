@@ -88,12 +88,12 @@ function App() {
 }
 ```
 
-#### drag
+### drag
 
 원하는 component에 drag기능을 넣고 싶다면 그냥 property에 drag를 추가하기만 된다.
 
 ```javascript
-<Box drag />
+<Box drag dragSnapToOrigin dragElastic={1} />
 ```
 
 원하는 xyz축으로만 이동시키게 하고 싶으면 drag="x"와 같이 설정한다.
@@ -109,3 +109,28 @@ dragElastic
 0 : 마우스 포인터가 제한된 공간을 벗어 나더라도 집힌 elemet는 따라서 나갈 수 없다.
 
 0을 넘어가면 박스 밖을 따라 나가지만 제한 하는 정도가 걸리는데 Elastic의 정도에 따라 설정이 가능하다.
+
+#### MotionValue
+
+MotionValue(애니메이션이 실행될때)가 업데이트될 때 React Rendering Cycle을 실행하지않는다 == ReactJs State로 살지 않는다.
+
+MotionValue는 특정한 값을 계속 추적할 수 있도록 해준다. x,y 등...
+
+```javascript
+const x = useMotionValue(0);
+useEffect(() => {
+  x.onChange(() => console.log(x.get()));
+}, [x]);
+return (
+  <>
+    <button onClick={() => x.set(200)}>click</button>
+    <Box style={{ x }} drag="x" />
+  </>
+);
+```
+
+MotionValue()의 인자값은 default 값 설정이다.
+특정값(위 코드의 첫번째 줄 x)을 만들고 그 값을 style에 넣으면 유저가 드래그할 때 값이 업데이트 된다.
+
+1. 위와 같은 코드일때는 x값이 업데이트 될때 마다 x의 값을 콘솔에 찍어준다.
+2. button을 누르면 x의 좌표가 200으로 움직인다.

@@ -179,3 +179,48 @@ return (
 svg tag내에 path가 존재하고 fill element가 존재하는데 이것은 svg의 색을 결정한다.
 
 stroke는 svg의 테두리로 색과 두께를 설정할 수 있다.
+transition에서 default와 fill(duration, delay)을 통해 property를 개별로 설정할 수 있다.
+
+```
+const Svg = styled.svg`
+  width: 300px;
+  height: 300px;
+  path {
+    stroke: white;
+    stroke-width: 2;
+  }
+`;
+
+const svg = {
+  start: { pathLength: 0, fill: "rgba(255, 255, 255, 0)" },
+  end: {
+    fill: "rgba(255, 255, 255, 1)",
+    pathLength: 1,
+  },
+};
+
+function App() {
+  return (
+    <Wrapper>
+      <Svg
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 448 512"
+      >
+        <motion.path
+          variants={svg}
+          initial={"start"}
+          animate={"end"}
+          transition={{
+            default: {
+              duration: 5,
+            },
+            fill: { duration: 2, delay: 5 },
+          }}
+          d="~~"
+        ></motion.path>
+      </Svg>
+    </Wrapper>
+  );
+}
+```

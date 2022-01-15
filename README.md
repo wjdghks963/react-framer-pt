@@ -173,3 +173,9 @@ return (
   </Wrapper>
 );
 ```
+
+### SVG를 이용한 애니메이션
+
+svg tag내에 path가 존재하고 fill element가 존재하는데 이것은 svg의 색을 결정한다.
+
+stroke는 svg의 테두리로 색과 두께를 설정할 수 있다.

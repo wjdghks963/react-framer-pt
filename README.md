@@ -224,3 +224,30 @@ function App() {
   );
 }
 ```
+
+### Animate Presence
+
+component이며 React.js App에서 사라지는 component를 animate한다.
+
+규칙
+
+1. visible한 상태
+2. component안에 조건문이 존재해야한다.
+
+```javascript
+<Wrapper>
+  <button onClick={toggleShowing}>Click</button>
+  <AnimatePresence>
+    {showing ? (
+      <Box
+        variants={boxVariants}
+        initial="initial"
+        animate="visible"
+        exit="leaving"
+      />
+    ) : null}
+  </AnimatePresence>
+</Wrapper>
+```
+
+exit는 해당하는 element가 사라질때 어떤 animation을 발생시킬지 정함

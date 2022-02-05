@@ -13,64 +13,51 @@ const Wrapper = styled(motion.div)`
 const Box = styled(motion.div)`
   width: 200px;
   height: 200px;
-
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
-`;
-
-const BiggerBox = styled.div`
-  width: 600px;
-  height: 600px;
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 40px;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  top: 100px;
+  font-size: 23px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 
-const Svg = styled.svg`
-  width: 300px;
-  height: 300px;
-  path {
-    stroke: white;
-    stroke-width: 2;
-  }
-`;
-
-const svg = {
-  start: { pathLength: 0, fill: "rgba(255, 255, 255, 0)" },
-  end: {
-    fill: "rgba(255, 255, 255, 1)",
-    pathLength: 1,
-  },
-};
-
-const boxVariants = {
-  initial: {
+const box = {
+  invisible: {
+    x: 500,
     opacity: 0,
     scale: 0,
   },
-  visible: { opacity: 1, scale: 1, rotateZ: 360 },
-  leaving: { opacity: 0, sccale: 0, y: 20 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+  exit: { x: -500, opacity: 0, scale: 0, transition: { duratoion: 1 } },
 };
 
 function App() {
-  const [showing, setShowing] = useState(false);
-  const toggleShowing = () => setShowing((prev) => !prev);
+  const [visible, setVisible] = useState(1);
+  const nextPlease = () => setVisible((prev) => (prev === 10 ? 10 : prev + 1));
+  const prevPlease = () => setVisible((prev) => (prev === 1 ? 1 : prev - 1));
   return (
     <Wrapper>
-      <button onClick={toggleShowing}>Click</button>
       <AnimatePresence>
-        {showing ? (
-          <Box
-            variants={boxVariants}
-            initial="initial"
-            animate="visible"
-            exit="leaving"
-          />
-        ) : null}
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
+          i === visible ? (
+            <Box variants={box} initial="invisible" key={i}>
+              {i}
+            </Box>
+          ) : null
+        )}
       </AnimatePresence>
+      <button onClick={nextPlease}>next</button>
+      <button onClick={prevPlease}>next</button>
     </Wrapper>
   );
 }

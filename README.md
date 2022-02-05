@@ -251,3 +251,36 @@ component이며 React.js App에서 사라지는 component를 animate한다.
 ```
 
 exit는 해당하는 element가 사라질때 어떤 animation을 발생시킬지 정함
+
+<hr/>
+
+### Slider
+
+Slider 기능
+
+```javascript
+const box = {
+  invisible: {},
+  visible: {},
+  exit: {},
+};
+
+function App() {
+  const [visible, setVisible] = useState(1);
+  const nextPlease = () => setVisible((prev) => (prev === 10 ? 10 : prev + 1));
+  return (
+    <Wrapper>
+      <AnimatePresence>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
+          i === visible ? (
+            <Box variants={box} initial="invisible" key={i}>
+              {i}
+            </Box>
+          ) : null
+        )}
+      </AnimatePresence>
+      <button onClick={nextPlease}>next</button>
+    </Wrapper>
+  );
+}
+```

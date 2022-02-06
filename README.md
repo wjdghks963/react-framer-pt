@@ -36,6 +36,8 @@ const Box = styled(motion.div)`
 
 https://www.framer.com/docs/introduction/##variants
 
+[Variants](https://github.com/wjdghks963/react-framer-pt/commit/9bba56355a6acb787433cb286e4852ab3254ab01)
+
 애니메이션의 무대, initial showing hidden from 같은 것들
 
 설정을 분리된 object로 옮김
@@ -90,6 +92,8 @@ function App() {
 
 ### drag
 
+[drag](https://github.com/wjdghks963/react-framer-pt/commit/ba5f55f62237a78b3470180408b216abfdc52a1a)
+
 원하는 component에 drag기능을 넣고 싶다면 그냥 property에 drag를 추가하기만 된다.
 
 ```javascript
@@ -111,6 +115,9 @@ dragElastic
 0을 넘어가면 박스 밖을 따라 나가지만 제한 하는 정도가 걸리는데 Elastic의 정도에 따라 설정이 가능하다.
 
 #### MotionValue
+
+[MotionValue 1](https://github.com/wjdghks963/react-framer-pt/commit/db18c3d1ff307a74d712c3fa3cb30a826c60e2b2)
+[MotionValue 2](https://github.com/wjdghks963/react-framer-pt/commit/f15baf6838e0be9298368c7fea952381dcda00d2)
 
 MotionValue(애니메이션이 실행될때)가 업데이트될 때 React Rendering Cycle을 실행하지않는다 == ReactJs State로 살지 않는다.
 
@@ -176,6 +183,8 @@ return (
 
 ### SVG를 이용한 애니메이션
 
+[SVG animation](https://github.com/wjdghks963/react-framer-pt/commit/1a73c531d449eeecc11656e2c987dd499b1feb95)
+
 svg tag내에 path가 존재하고 fill element가 존재하는데 이것은 svg의 색을 결정한다.
 
 stroke는 svg의 테두리로 색과 두께를 설정할 수 있다.
@@ -227,6 +236,8 @@ function App() {
 
 ### Animate Presence
 
+[Animate Presence](https://github.com/wjdghks963/react-framer-pt/commit/8785b641f39fe15964929bacbf2167cd69a425fb)
+
 component이며 React.js App에서 사라지는 component를 animate한다.
 
 규칙
@@ -258,13 +269,9 @@ exit는 해당하는 element가 사라질때 어떤 animation을 발생시킬지
 
 Slider 기능
 
-```javascript
-const box = {
-  invisible: {},
-  visible: {},
-  exit: {},
-};
+[slider 1](https://github.com/wjdghks963/react-framer-pt/commit/32bf9cb6582f2130c2c08e81caa48f520ba54766)
 
+```javascript
 function App() {
   const [visible, setVisible] = useState(1);
   const nextPlease = () => setVisible((prev) => (prev === 10 ? 10 : prev + 1));
@@ -273,7 +280,7 @@ function App() {
       <AnimatePresence>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
           i === visible ? (
-            <Box variants={box} initial="invisible" key={i}>
+            <Box variants={box} exit="exit" initial="invisible" key={i}>
               {i}
             </Box>
           ) : null
@@ -283,4 +290,17 @@ function App() {
     </Wrapper>
   );
 }
+```
+
+### custom
+
+[slider 2 custom]()
+
+motion.tag에서 custom을 사용할 수 있다.
+여러 object를 가진 object인 variants를 바꿀 수 있는데 custom을 사용하기 위해선 variant를 object를 return하는 function으로 바꿔야한다.
+
+exitBeforeEnter proprty는 exit 상태가 완전히 끝나고 나서 다음 애니메이션을 수행할수 있게 해준다.
+
+```javascript
+<motion.div custom={0} />
 ```
